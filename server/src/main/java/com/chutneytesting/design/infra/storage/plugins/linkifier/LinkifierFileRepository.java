@@ -4,14 +4,11 @@ import static com.chutneytesting.tools.file.FileUtils.initFolder;
 
 import com.chutneytesting.design.domain.plugins.linkifier.Linkifier;
 import com.chutneytesting.design.domain.plugins.linkifier.Linkifiers;
-import com.chutneytesting.tools.ZipUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,7 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.zip.ZipOutputStream;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -73,15 +69,6 @@ public class LinkifierFileRepository implements Linkifiers {
         Map<String, LinkifierDto> linkifiers = readFromDisk();
         linkifiers.remove(id);
         writeOnDisk(resolvedFilePath, linkifiers);
-    }
-
-    @Override
-    public void backup(OutputStream outputStream) {
-        try (ZipOutputStream zipOutPut = new ZipOutputStream(new BufferedOutputStream(outputStream, 4096))) {
-            ZipUtils.compressDirectoryToZipfile(storeFolderPath.getParent(), storeFolderPath.getFileName(), zipOutPut);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
     }
 
     private Map<String, LinkifierDto> readFromDisk() {

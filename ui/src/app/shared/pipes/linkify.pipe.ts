@@ -6,9 +6,13 @@ import { SafeHtml } from '@angular/platform-browser';
 export class LinkifyPipe implements PipeTransform {
 
     transform(value: string, option?: string): SafeHtml {
-        let newValue: string = value;
         const storedLinkifiers = sessionStorage.getItem('linkifiers');
-        const linkifiers: Array<Linkifier> = storedLinkifiers ? JSON.parse(storedLinkifiers) : [];
+        if (value == null || storedLinkifiers == null) {
+            return value ? value : '';
+        }
+
+        let newValue: string = value;
+        const linkifiers: Array<Linkifier> = JSON.parse(storedLinkifiers);
 
         for (const l of linkifiers) {
             const regExp = new RegExp(l.pattern, 'g');

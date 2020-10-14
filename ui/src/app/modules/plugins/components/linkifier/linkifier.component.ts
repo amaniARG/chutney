@@ -53,7 +53,7 @@ export class LinkifierComponent implements OnInit {
     }
 
     addLinkifier() {
-        const linkifier = new Linkifier(this.linkifierForm.value['pattern'], this.linkifierForm.value['link'])
+        const linkifier = new Linkifier(this.linkifierForm.value['pattern'], this.linkifierForm.value['link']);
         this.linkifierService.save(linkifier).subscribe(
             (res) => {
                 this.notify('Linkifier added', false);
@@ -65,12 +65,11 @@ export class LinkifierComponent implements OnInit {
         );
     }
 
-    remove(i: number) {
-        const linkifier = this.linkifiers[i];
+    remove(linkifier: Linkifier, i: number) {
+        this.linkifiers.splice(i);
         this.linkifierService.delete(linkifier).subscribe(
             (res) => {
                 this.notify('Linkifier removed', false);
-                this.loadLinkifiers();
             },
             (error) => {
                 this.notify(error.error, true);

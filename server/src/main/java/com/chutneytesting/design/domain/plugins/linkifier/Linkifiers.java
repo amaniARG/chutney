@@ -1,9 +1,8 @@
 package com.chutneytesting.design.domain.plugins.linkifier;
 
-import com.chutneytesting.admin.domain.Backupable;
 import java.util.List;
 
-public interface Linkifiers extends Backupable {
+public interface Linkifiers {
 
     List<Linkifier> getAll();
 
