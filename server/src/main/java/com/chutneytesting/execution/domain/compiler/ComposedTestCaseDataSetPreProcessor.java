@@ -129,7 +129,7 @@ public class ComposedTestCaseDataSetPreProcessor implements TestCasePreProcessor
             m.putAll(iterationOutputs.entrySet().stream()
             .filter(previousOutput ->
                 si.inputs.entrySet().stream()
-                    .anyMatch(input -> input.getKey().equals("${#" + previousOutput + "}")
+                    .anyMatch(input -> input.getKey().equals("${#" + previousOutput.getKey() + "}")
                         || usePreviousIterationOutput(previousOutput.getKey(), input.getValue())
                     ))
             .collect(toMap(Map.Entry::getKey, Map.Entry::getValue))));
