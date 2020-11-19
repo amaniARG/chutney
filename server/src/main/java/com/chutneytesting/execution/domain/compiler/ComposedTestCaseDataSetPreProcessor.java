@@ -226,7 +226,6 @@ public class ComposedTestCaseDataSetPreProcessor implements TestCasePreProcessor
                 .build());
         }
 
-
         iterations.addAll(iterationsFromUsingPreviousOutput);
         iterationOutputs.replaceAll((k, v) -> v = index.get());
         return iterations;
