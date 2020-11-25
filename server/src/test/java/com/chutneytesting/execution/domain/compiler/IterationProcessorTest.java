@@ -148,6 +148,11 @@ public class IterationProcessorTest {
 
     }
 
+    // TODO //
+    // a test with a step using 2 previous indexed values and which should create 2 other indexed outputs values //
+    // a test with a step using 2 previous indexed values and 3 multivalues in input, how many iteration should we have ? 2, 3, 6 combine ? Fuck ! //
+
+
     @Test
     public void should_index_iterations_outputs_when_inside_a_parent_step() {
 
